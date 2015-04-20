@@ -22,7 +22,7 @@ if ( defined('DOING_AJAX') && DOING_AJAX && isset( $_REQUEST['p2ajax'] ) ) {
  * By the time the next release rolls around, it'll be safe to remove.
  */
 class P2Ajax extends P2Ajax_Read {
-	function dispatch() {
+	static function dispatch() {
 		$action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
 
 		do_action( "p2_ajax", $action );
@@ -36,7 +36,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Get post to edit.
 	 */
-	function get_post() {
+	static function get_post() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -80,7 +80,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Get comment to edit.
 	 */
-	function get_comment() {
+	static function get_comment() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -94,7 +94,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Edit a post.
 	 */
-	function save_post() {
+	static function save_post() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -155,7 +155,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Edit a comment.
 	 */
-	function save_comment() {
+	static function save_comment() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -183,7 +183,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Create a post.
 	 */
-	function new_post() {
+	static function new_post() {
 		global $user_ID;
 
 		if ( empty( $_POST['action'] ) || $_POST['action'] != 'new_post' ) {
@@ -212,7 +212,7 @@ class P2Ajax extends P2Ajax_Read {
 			$tags = '';
 
 		// For empty or placeholder text, create a nice title based on content
-		if ( empty( $title ) || __( 'What are you going to share?', 'p2' ) == $title )
+		if ( empty( $title ) || __( 'Post Title', 'p2' ) == $title )
 	    	$post_title = p2_title_from_content( $post_content );
 		else
 			$post_title = $title;
@@ -234,22 +234,6 @@ class P2Ajax extends P2Ajax_Read {
 			'tags_input'    => $tags,
 			'post_status'   => 'publish'
 		) );
-
-		/******************************/
-		/* P2 Timeframe Customization */
-		/******************************/
-
-		// This will give us the timeframe
-		if (isset($_POST['timeframe'])) {
-			$timeframe = $_POST['timeframe'];
-			
-			// If it's a Status Update, add the timeframe meta
-			if ($post_format == 'status') {
-				add_post_meta($post_id, 'timeframe', $timeframe, true );
-			} 
-		}
-
-		/* END OF P2 Timeframe Customization */
 
 		if ( empty( $post_id ) )
 			echo '0';

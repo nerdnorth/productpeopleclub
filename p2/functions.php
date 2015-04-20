@@ -527,20 +527,6 @@ function p2_new_post_noajax() {
 add_filter( 'template_redirect', 'p2_new_post_noajax' );
 
 /**
- * iPhone viewport meta tag.
- *
- * Hooks into the wp_head action late.
- *
- * @uses p2_is_iphone()
- * @since P2 1.4
- */
-function p2_viewport_meta_tag() {
-	if ( p2_is_iphone() )
-		echo '<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no"/>';
-}
-add_action( 'wp_head', 'p2_viewport_meta_tag', 1000 );
-
-/**
  * iPhone Stylesheet.
  *
  * Hooks into the wp_enqueue_scripts action late.
@@ -733,42 +719,6 @@ function p2_wp_title( $title, $sep ) {
 	return $title;
 }
 add_filter( 'wp_title', 'p2_wp_title', 10, 2 );
-
-/**
- * Custom code added to P2 to enable email notifications
- * when a user is @mentioned in the site.
- *
- * Original at http://trepmal.com/2011/06/24/using-wordpress-multisite-p2-and-more/
- * and modified from there.
- */
-add_action('publish_post','send_email_notification_once',9);
-function send_email_notification_once($postID) {
-	$post = get_post($postID);
-	$author = get_userdata($post->post_author);
-	global $p2;
-	$mentions = $p2->components['mentions']->find_mentions($post->post_content);
-	$permalink = get_permalink($postID);
-	$blog_title = get_bloginfo('name');
-	foreach ( $mentions as $match ) {
-		$email = get_user_by('slug',$match)->user_email;
-		$message = "You have been mentioned in this post:\n $permalink \n\n {$post->post_content} ";
-		wp_mail($email, "[$blog_title] You've been mentioned by {$author->display_name}", $message);
-	}
-}
- 
-add_action('comment_post','send_email_notification_once_comment',9);
-function send_email_notification_once_comment($commentID){
-	$comment = get_comment($commentID);
-	global $p2;
-	$mentions = $p2->components['mentions']->find_mentions($comment->comment_content);
-	$permalink = get_permalink($comment->comment_post_ID);
-	$blog_title = get_bloginfo('name');
-	foreach ( $mentions as $match ) {
-		$email = get_user_by('slug',$match)->user_email;
-		$message = "You have been mentioned by {$comment->comment_author} in this comment:\n $permalink \n\n {$comment->comment_content} ";
-		wp_mail($email, "[$blog_title] You've been mentioned in a comment by {$comment->comment_author}", $message);
-	}
-}
 
  // If user not logged in, redirect to landing page
  

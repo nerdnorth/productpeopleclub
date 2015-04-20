@@ -13,8 +13,6 @@
 ?>
 <?php get_header(); ?>
 
-<?php if ( is_user_logged_in() ) : ?>
-
 <div class="sleeve_main">
 	<?php if ( p2_user_can_post() && !is_archive() ) : ?>
 		<?php locate_template( array( 'post-form.php' ), true ); ?>
@@ -60,15 +58,5 @@
 	</div> <!-- main -->
 
 </div> <!-- sleeve -->
-
-<?php else : ?>
-
-  <div class="profile-box signed-out">
-
-    Already a customer? Please <a title="Sign in" href="<?php echo memberful_sign_in_url(); ?>">sign in</a>.
-
-  </div>
-
-<?php endif; ?>
 
 <?php get_footer(); ?>
