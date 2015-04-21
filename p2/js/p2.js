@@ -1022,7 +1022,12 @@ window.p2 = window.p2 || {};
 			var post_title = $('#posttitle').val();
 			var post_citation = $('#postcitation').val();
 
-			var args = {action: 'new_post', _ajax_post:nonce, posttext: posttext, tags: tags, post_format: post_format, post_title: post_title, post_citation: post_citation, post_subscribe: post_subscribe };
+			// P2 Timeframe Customization
+			var timeframe = $('#timeframe').val();
+			// Added 'timeframe: timeframe' below 
+			var args = {action: 'new_post', _ajax_post:nonce, posttext: posttext, tags: tags, post_format: post_format, timeframe: timeframe, post_title: post_title, post_citation: post_citation, post_subscribe: post_subscribe };
+			// End P2 Timeframe Customization
+
 			var errorMessage = '';
 			$.ajax({
 				type: "POST",

@@ -235,6 +235,28 @@ class P2Ajax extends P2Ajax_Read {
 			'post_status'   => 'publish'
 		) );
 
+		/******************************/
+		/* P2 Timeframe Customization */
+		/******************************/
+
+		// This will give us the timeframe
+		if (isset($_POST['timeframe'])) {
+			$timeframe = $_POST['timeframe'];
+			
+			// If it's a Status Update, add the timeframe meta
+			if ($post_format == 'status') {
+				add_post_meta($post_id, 'timeframe', $timeframe, true );
+			} 
+		}
+
+		/* END OF P2 Timeframe Customization */
+
+		if ( empty( $post_id ) )
+			echo '0';
+
+		set_post_format( $post_id, $post_format );
+		echo $post_id;
+
 		if ( empty( $post_id ) )
 			echo '0';
 
@@ -242,3 +264,4 @@ class P2Ajax extends P2Ajax_Read {
 		echo $post_id;
 	}
 }
+
