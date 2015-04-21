@@ -720,23 +720,3 @@ function p2_wp_title( $title, $sep ) {
 }
 add_filter( 'wp_title', 'p2_wp_title', 10, 2 );
 
- // If user not logged in, redirect to landing page
- 
-if (
- 
-!in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'))
- 
-&& !is_admin()
- 
-&& !is_user_logged_in()
- 
-) {
- 
-header('Vary: Cookie');
-header("Cache-Control: no-cache, max-age=0, must-revalidate");
- 
-wp_redirect('http://app.productpeople.club?memberful_endpoint=auth', 302);
- 
-exit;
- 
-}
