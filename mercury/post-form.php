@@ -61,7 +61,7 @@
 		<ul id="post-types">
 			<li><a id="status" class="post-format-button<?php if ( 'status' == $post_format ) : ?> selected<?php endif; ?>" href="<?php echo site_url( '?p=status' ); ?>" title="<?php esc_attr_e( 'Status Update', 'p2' ); ?>"><?php _e( 'Status Update', 'p2' ); ?></a></li>
 			<li><a id="post" class="post-format-button<?php if ( 'post' == $post_format || 'standard' == $post_format ) : ?> selected<?php endif; ?>" href="<?php echo site_url( '?p=post' ); ?>" title="<?php esc_attr_e( 'Show and Tell', 'p2' ); ?>"><?php _e( 'Show and Tell', 'p2' ); ?></a></li>
-			<li><a id="quote" class="post-format-button<?php if ( 'quote' == $post_format ) : ?> selected<?php endif; ?>" href="<?php echo site_url( '?p=quote' ); ?>" title="<?php esc_attr_e( 'Hey', 'p2' ); ?>"><?php _e( 'Hey', 'p2' ); ?></a></li>
+			<li><a id="quote" class="post-format-button<?php if ( 'quote' == $post_format ) : ?> selected<?php endif; ?>" href="<?php echo site_url( '?p=quote' ); ?>" title="<?php esc_attr_e( 'Quote', 'p2' ); ?>"><?php _e( 'Quote', 'p2' ); ?></a></li>
 			<li><a id="link" class="post-format-button<?php if ( 'link' == $post_format ) : ?> selected<?php endif; ?>" href="<?php echo site_url( '?p=link' ); ?>" title="<?php esc_attr_e( 'Link', 'p2' ); ?>"><?php _e( 'Link', 'p2' ); ?></a></li>
 		</ul>
 
@@ -82,8 +82,8 @@
 
 				<div id="postbox-type-post" class="post-input <?php if ( 'post' == $post_format || 'standard' == $post_format ) echo ' selected'; ?>">
 					<input type="text" name="posttitle" id="posttitle" value=""
-						onfocus="this.value=(this.value=='<?php echo esc_js( __( 'What are you going to share?', 'p2' ) ); ?>') ? '' : this.value;"
-						onblur="this.value=(this.value=='') ? '<?php echo esc_js( __( 'What are you going to share?', 'p2' ) ); ?>' : this.value;" />
+						onfocus="this.value=(this.value=='<?php echo esc_js( __( 'Post Title', 'p2' ) ); ?>') ? '' : this.value;"
+						onblur="this.value=(this.value=='') ? '<?php echo esc_js( __( 'Post Title', 'p2' ) ); ?>' : this.value;" />
 				</div>
 				<?php if ( current_user_can( 'upload_files' ) ): ?>
 				<div id="media-buttons" class="hide-if-no-js">
@@ -104,9 +104,13 @@
 				</div>
 				<!-- End P2 Customization -->
 
-				<textarea class="expand70-200" name="posttext" id="posttext" rows="4" cols="60" ></textarea>
+				<textarea class="expand70-200" name="posttext" id="posttext" rows="4" cols="60"></textarea>
 				<div id="postbox-type-quote" class="post-input <?php if ( 'quote' == $post_format ) echo " selected"; ?>">
 					<label for="postcitation" class="invisible"><?php _e( 'Citation', 'p2' ); ?></label>
+						<input id="postcitation" name="postcitation" type="text"
+							value="<?php esc_attr_e( 'Citation', 'p2' ); ?>"
+							onfocus="this.value=(this.value=='<?php echo esc_js( __( 'Citation', 'p2' ) ); ?>') ? '' : this.value;"
+							onblur="this.value=(this.value=='') ? '<?php echo esc_js( __( 'Citation', 'p2' ) ); ?>' : this.value;" />
 				</div>
 				<label class="post-error" for="posttext" id="posttext_error"></label>
 				<div class="postrow">

@@ -1,11 +1,11 @@
 /*
-Theme Name: Mercury
+Theme Name: Mercury Custom
 Theme URI: http://ryansommers.com/mercury
 Description: Enjoy all of WordPress's P2 theme features like inline comments, a posting form right on the homepage, inline editing of posts and comments, real-time updates and more — now with a clean, modern and responsive layout.
 Author: Ryan Sommers
 Author URI: http://ryansommers.com/
-Template: p2
-Version: 1.0.4
+Template: p2-custom
+Version: 1.0.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: two-columns, responsive-layout, rtl-language-support, right-sidebar, white, light, front-page-post-form, translation-ready, custom-background, custom-header, custom-menu, post-formats, sticky-post, theme-options
@@ -14,7 +14,7 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others
 */
 
-@import url("../p2/style.css");
+@import url("../p2-custom/style.css");
 
 /* General Resets */
 body {

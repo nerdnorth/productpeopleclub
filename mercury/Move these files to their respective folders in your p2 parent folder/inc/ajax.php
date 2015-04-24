@@ -22,7 +22,7 @@ if ( defined('DOING_AJAX') && DOING_AJAX && isset( $_REQUEST['p2ajax'] ) ) {
  * By the time the next release rolls around, it'll be safe to remove.
  */
 class P2Ajax extends P2Ajax_Read {
-	static function dispatch() {
+	function dispatch() {
 		$action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
 
 		do_action( "p2_ajax", $action );
@@ -36,7 +36,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Get post to edit.
 	 */
-	static function get_post() {
+	function get_post() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -80,7 +80,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Get comment to edit.
 	 */
-	static function get_comment() {
+	function get_comment() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -94,7 +94,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Edit a post.
 	 */
-	static function save_post() {
+	function save_post() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -155,7 +155,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Edit a comment.
 	 */
-	static function save_comment() {
+	function save_comment() {
 		check_ajax_referer( 'ajaxnonce', '_inline_edit' );
 		if ( !is_user_logged_in() ) {
 			die( '<p>'.__( 'Error: not logged in.', 'p2' ).'</p>' );
@@ -183,7 +183,7 @@ class P2Ajax extends P2Ajax_Read {
 	/*
 	 * Create a post.
 	 */
-	static function new_post() {
+	function new_post() {
 		global $user_ID;
 
 		if ( empty( $_POST['action'] ) || $_POST['action'] != 'new_post' ) {
@@ -242,9 +242,9 @@ class P2Ajax extends P2Ajax_Read {
 		// This will give us the timeframe
 		if (isset($_POST['timeframe'])) {
 			$timeframe = $_POST['timeframe'];
-
-					// If it's a Status Update, add the timeframe meta
-			if ('status' == $post_format) {
+			
+			// If it's a Status Update, add the timeframe meta
+			if ($post_format == 'status') {
 				add_post_meta($post_id, 'timeframe', $timeframe, true );
 			} 
 		}

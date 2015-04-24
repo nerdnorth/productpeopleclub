@@ -14,10 +14,4 @@ function mercury_load_fonts() {
   wp_enqueue_style( 'googleFonts');
 }
 
-function allow_author_uploads() {
-$author = get_role('editor');
-$author->add_cap('upload_files');
-}
-
 ?>
-

@@ -719,4 +719,3 @@ function p2_wp_title( $title, $sep ) {
 	return $title;
 }
 add_filter( 'wp_title', 'p2_wp_title', 10, 2 );
-
